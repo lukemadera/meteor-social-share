@@ -18,9 +18,9 @@ lmSocialShare.add =function(btnId, type, shareData, params) {
     document.getElementById(btnId).onclick =function(evt) {
       lmSocialSharePrivate.triggerLink({link: link});
     };
-    document.getElementById(btnId).ontouchend =function(evt) {
-      lmSocialSharePrivate.triggerLink({link: link});
-    };
+    // document.getElementById(btnId).ontouchend =function(evt) {
+    //   lmSocialSharePrivate.triggerLink({link: link});
+    // };
   }
 };
 
@@ -43,7 +43,12 @@ lmSocialShare.formUrl =function(type, shareData, params) {
 
 lmSocialSharePrivate.triggerLink =function(params) {
   if(params.link) {
-    window.open(params.link, "", "height=440,width=640,scrollbars=yes");
+    if(Meteor.isCordova) {
+      window.open(params.link, "_blank", "location=yes");
+    }
+    else {
+      window.open(params.link, "", "height=440,width=640,scrollbars=yes");
+    }
   }
 };
 
