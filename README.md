@@ -25,6 +25,8 @@ meteor add lukemadera:social-share
 
 ## Usage
 
+### Blaze
+
 ```html
 {{> lmSocialShare opts=opts}}
 ```
@@ -46,5 +48,22 @@ if(Meteor.isClient) {
   });
 }
 ```
+## React
 
+```js
+
+// in a react component:
+  let opts = {
+        facebook: true,
+        twitter: true,
+        pinterest: false,
+        shareData: {
+          url: 'http://google.com'
+        }
+    };
+    
+  <LmSocialShare {... opts} />
+  
+
+```
 Then style as needed with the `lm-social-share-btn` and `lm-social-share-facebook`, `lm-social-share-twitter`, `lm-social-share-pinterest` classes.
