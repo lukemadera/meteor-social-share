@@ -16,6 +16,7 @@ Package.onUse(function(api) {
   api.use('templating@1.0.0');
   api.use('blaze@2.0.0');
   api.use('reactive-var@1.0.5');
+  api.use('react');
 
   Cordova.depends({
     'org.apache.cordova.inappbrowser': '0.6.0'
