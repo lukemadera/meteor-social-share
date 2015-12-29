@@ -111,7 +111,6 @@ lmSocialSharePrivate.inputSelectAll =function(classname, id) {
 
 lmSocialSharePrivate.triggerShare =function(type, shareData, params) {
   if( type === 'url' ) {
-    console.log('url', params);
     lmSocialSharePrivate.inputSelectAll('lm-social-share-url-input', params.btnId);
     return;
   }
@@ -144,7 +143,6 @@ lmSocialSharePrivate.formButtonHtml =function(types, html, shareData) {
     ) : (
       "<div class='lm-social-share-btn-icon'>" + lmSocialSharePrivate.svgs[key].html + "</div>"
     );
-    console.log(key, html[key]);
   });
   return html;
 };
