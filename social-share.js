@@ -5,8 +5,9 @@ TESTING:
 - ios web
   -no: email, facebookMessage, gmail (opens, but no prepopulated content)
 - android app
- - no: none? access rules again?
+ - no: email (works but shows a blank page as well - stop that), facebook, facebookMessage, gmail (opens, but no prepopulated content)
 - ios app
+  - TODO
 
 
 
@@ -54,11 +55,47 @@ This creates social sharing buttons. There's some complications for making
     @param {String} [url]
 */
 lmSocialShare.add =function(btnId, type, shareData, params) {
+  var platform =lmSocialSharePrivate.getPlatform();
+  var directLink =lmSocialSharePrivate.useDirectLink(type, platform);
   if(document.getElementById(btnId)) {
-    document.getElementById(btnId).onclick =function(evt) {
-      lmSocialSharePrivate.triggerShare(type, shareData, { btnId: btnId });
-    };
+    if(directLink) {
+      lmSocialShare.formLink(type, shareData, function(err, result) {
+        if(result.link) {
+          document.getElementById(btnId).href =result.link;
+          document.getElementById(btnId).target ='_blank';
+        }
+        else {
+          console.error('lm-social-share no link');
+        }
+      });
+    }
+    else {
+      document.getElementById(btnId).onclick =function(evt) {
+        lmSocialSharePrivate.triggerShare(type, shareData, { btnId: btnId });
+      };
+    }
   }
+};
+
+lmSocialSharePrivate.useDirectLink =function(type, platform) {
+  if(type === 'email' ) {
+    return ( platform.mobile || platform.cordova ) ? true : false;
+  }
+  return false;
+};
+
+lmSocialSharePrivate.getPlatform =function() {
+  var platform ={
+    cordova: Meteor.isCordova,
+    ios: /iPhone|iPad|iPod/i.test(navigator.userAgent),
+    android: /Android/i.test(navigator.userAgent),
+    blackberry: /BlackBerry/i.test(navigator.userAgent),
+    windows: /IEMobile/i.test(navigator.userAgent)
+  };
+  platform.mobile = ( platform.ios || platform.android || platform.blackberry
+   || platform.windows ) ? true : false;
+
+  return platform;
 };
 
 lmSocialShare.formLink =function(type, shareData, callback) {
