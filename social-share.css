@@ -5,7 +5,7 @@ To display vertically under each other, instead of side by side:
 .lm-social-share-cont {
   display: block;
 }
-.lm-social-share-cont .lm-social-share-btn {
+.lm-social-share-cont .lm-social-share-btn, .lm-social-share-cont .lm-social-share-url-input {
   display: block;
   width: 100%;
 }
@@ -50,4 +50,10 @@ To display vertically under each other, instead of side by side:
 }
 .lm-social-share-btn.lm-social-share-twitter {
   background-color: #00acee;
+}
+
+.lm-social-share-url-input {
+  width: 45px;
+  height: 45px;
+  text-align: center;
 }

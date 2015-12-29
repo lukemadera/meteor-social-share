@@ -1,3 +1,12 @@
+# 1.1.1 (2015-12-29)
+
+## Features
+
+- add `url` new type
+- add support for `body` shareData (for email, gmail pre-populating of body)
+- remove React from Readme as no longer supported
+
+
 # 1.1.0 (2015-12-28)
 
 ## Features

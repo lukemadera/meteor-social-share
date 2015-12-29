@@ -30,6 +30,10 @@
       <div id='{{eles.facebook.id}}' class='lm-social-share-btn lm-social-share-facebook'>{{{ eles.facebook.buttonHtml }}}</div>
     {{/if}}
 
+    {{#if opts.url}}
+      <div id='{{eles.url.id}}' class='lm-social-share-btn lm-social-share-url'>{{{ eles.url.buttonHtml }}}</div>
+    {{/if}}
+
   </div>
 
 </template>

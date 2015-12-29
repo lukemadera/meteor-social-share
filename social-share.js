@@ -18,13 +18,15 @@ This creates social sharing buttons. There's some complications for making
 /**
 @param {String} btnId The html element to attach click (and touch) event
  handlers to.
-@param {String} type One of 'facebookMessage', 'gmail', 'facebook', 'twitter',
- 'pinterest', 'linkedIn', 'email'   // TODO - add google+?, sms? support
+@param {String} type One of 'email', 'facebook', 'facebookMessage', 'gmail',
+ 'linkedIn', 'pinterest', 'twitter', 'url'   // TODO - add google+?, sms? support
 @param {Object} shareData
   @param {String} url
   @param {String} description [pinterest only]
   @param {String} image [pinterest only]
   @param {String} subject [email, gmail, linkedIn only]
+  @param {String} body [email, gmail only] Url will be appended to
+   the end.
   @param {String} facebookAppId [facebookMessage only]
   @param {String} redirectUrl [facebookMessage only]
   @param {String} [defaultShareText] The default tweet/fb post/etc. text to
@@ -38,26 +40,29 @@ This creates social sharing buttons. There's some complications for making
     @param {String} [linkedIn]
     @param {String} [pinterest]
     @param {String} [twitter]
+    @param {String} [url]
 */
 lmSocialShare.add =function(btnId, type, shareData, params) {
   if(document.getElementById(btnId)) {
     document.getElementById(btnId).onclick =function(evt) {
-      lmSocialSharePrivate.triggerShare(type, shareData, {});
+      lmSocialSharePrivate.triggerShare(type, shareData, { btnId: btnId });
     };
   }
 };
 
 lmSocialShare.formLink =function(type, shareData, callback) {
   var link = null;
+  var body = shareData.body ? ( shareData.body + "\n\n" + shareData.url)
+   : shareData.url;
   if( type === 'email' ) {
     link ='mailto:?subject='+encodeURIComponent(shareData.subject) +
-     '&body='+encodeURIComponent(shareData.url);
+     '&body='+encodeURIComponent(body);
     return callback(null, { link: link });
   }
   if( type === 'gmail' ) {
     link ='https://mail.google.com/mail/u/0/?view=cm&fs=1&su=' +
      encodeURIComponent(shareData.subject) + '&body=' +
-     encodeURIComponent(shareData.url);
+     encodeURIComponent(body);
     return callback(null, { link: link });
   }
   else if( type === 'facebook' ) {
@@ -95,7 +100,21 @@ lmSocialShare.formLink =function(type, shareData, callback) {
   callback(null, null);
 };
 
+lmSocialSharePrivate.inputSelectAll =function(classname, id) {
+  var ele =document.getElementById(id);
+  // get input
+  ele =ele.getElementsByClassName(classname)[0];
+  if(ele) {
+    ele.setSelectionRange(0, ele.value.length);
+  }
+};
+
 lmSocialSharePrivate.triggerShare =function(type, shareData, params) {
+  if( type === 'url' ) {
+    console.log('url', params);
+    lmSocialSharePrivate.inputSelectAll('lm-social-share-url-input', params.btnId);
+    return;
+  }
   if(type && shareData) {
     // Must open pop-up window immediately (before AJAX call) to prevent
     // pop-up blockers from stopping it. After it is open, then set the url.
@@ -117,12 +136,15 @@ lmSocialSharePrivate.triggerShare =function(type, shareData, params) {
   }
 };
 
-lmSocialSharePrivate.formButtonHtml =function(types, html) {
+lmSocialSharePrivate.formButtonHtml =function(types, html, shareData) {
   html = html || {};
   types.forEach(function(key) {
-    html[key] = html[key] || (
+    html[key] = html[key] ? html[key] : ( key === 'url' ) ? (
+      "<input type='text' readonly=true value='" + shareData.url +"' class='lm-social-share-url-input' />"
+    ) : (
       "<div class='lm-social-share-btn-icon'>" + lmSocialSharePrivate.svgs[key].html + "</div>"
     );
+    console.log(key, html[key]);
   });
   return html;
 };
@@ -134,10 +156,11 @@ Template.lmSocialShare.created =function() {
 Template.lmSocialShare.helpers({
   eles: function() {
     var instid =Template.instance().instid.get();
-    var types =['facebook', 'twitter', 'pinterest', 'facebookMessage',
-     'gmail', 'email', 'linkedIn'];
+    var types =['email', 'facebook', 'facebookMessage', 'gmail', 'linkedIn',
+     'pinterest', 'twitter', 'url'];
     var shareData =this.opts.shareData;
-    var buttonHtml =lmSocialSharePrivate.formButtonHtml(types, this.opts.buttonHtml);
+    var buttonHtml =lmSocialSharePrivate.formButtonHtml(types,
+     this.opts.buttonHtml, shareData);
     var eles ={};
     var ii;
     for(ii =0; ii<types.length; ii++) {
