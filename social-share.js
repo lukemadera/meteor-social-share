@@ -1,4 +1,15 @@
 /**
+TESTING:
+- android web
+  - no: email, facebookMessage
+- ios web
+  -no: email, facebookMessage, gmail (opens, but no prepopulated content)
+- android app
+ - no: none? access rules again?
+- ios app
+
+
+
 NOTE: These will NOT work properly on localhost. 3rd party (social) services
  (for sharing) will complain about invalid URLs because
  localhost is not publicly accessible. Must be tested live / with publicly
@@ -25,13 +36,13 @@ This creates social sharing buttons. There's some complications for making
   @param {String} description [pinterest only]
   @param {String} image [pinterest only]
   @param {String} subject [email, gmail, linkedIn only]
-  @param {String} body [email, gmail only] Url will be appended to
+  @param {String} body [email, gmail, linkedIn only] Url will be appended to
    the end.
   @param {String} facebookAppId [facebookMessage only]
   @param {String} redirectUrl [facebookMessage only]
   @param {String} [defaultShareText] The default tweet/fb post/etc. text to
    pre-populate (user can alter).
-  @param {Object} [buttoHtml] The button html, one key per each type. If not set,
+  @param {Object} [buttonHtml] The button html, one key per each type. If not set,
    will use defaults.
     @param {String} [email]
     @param {String} [facebook]
@@ -80,7 +91,8 @@ lmSocialShare.formLink =function(type, shareData, callback) {
   else if( type === 'linkedIn' ) {
     link ='https://www.linkedin.com/shareArticle?mini=true&url=' +
      encodeURIComponent(shareData.url) + '&title=' +
-     encodeURIComponent(shareData.subject);
+     encodeURIComponent(shareData.subject) + '&summary=' +
+     encodeURIComponent(body);
     return callback(null, { link: link });
   }
   else if( type === 'pinterest' ) {
@@ -119,19 +131,29 @@ lmSocialSharePrivate.triggerShare =function(type, shareData, params) {
     // pop-up blockers from stopping it. After it is open, then set the url.
     var windowHandle;
     if(Meteor.isCordova) {
-      windowHandle =window.open(null, "_blank", "location=yes");
+      // Can NOT set the href after the window is open if using Cordova.
+      // https://wiki.apache.org/cordova/InAppBrowser
+      // windowHandle =window.open(null, "_blank", "location=yes");
+      lmSocialShare.formLink(type, shareData, function(err, result) {
+        if(result.link) {
+          windowHandle =window.open(result.link, "_blank", "location=yes");
+        }
+        else {
+          console.error('lm-social-share no link');
+        }
+      });
     }
     else {
       windowHandle =window.open(null, "", "height=440,width=640,scrollbars=yes");
+      lmSocialShare.formLink(type, shareData, function(err, result) {
+        if(result.link) {
+          windowHandle.location.href =result.link;
+        }
+        else {
+          windowHandle.close();
+        }
+      });
     }
-    lmSocialShare.formLink(type, shareData, function(err, result) {
-      if(result.link) {
-        windowHandle.location.href =result.link;
-      }
-      else {
-        windowHandle.close();
-      }
-    });
   }
 };
 

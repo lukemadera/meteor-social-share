@@ -1,3 +1,10 @@
+# 1.1.2-1
+
+# Bug Fixes
+
+- Get Cordova app links working.
+
+
 # 1.1.1 (2015-12-29)
 
 ## Features

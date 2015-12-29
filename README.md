@@ -49,3 +49,6 @@ if(Meteor.isClient) {
   });
 }
 ```
+
+Then create your meta tags as needed. An example Iron.router meta tag script is in `router-social.js`.
+You can test your meta tags with the Chrome Inspector by spoofing the User Agent to `Facebot` or `Twitterbot`.
