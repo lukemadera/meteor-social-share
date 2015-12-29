@@ -16,7 +16,7 @@ Package.onUse(function(api) {
   api.use('templating@1.0.0');
   api.use('blaze@2.0.0');
   api.use('reactive-var@1.0.5');
-  api.use('react', 'client');
+  // api.use('react@0.14.2', 'client');
 
   Cordova.depends({
     'org.apache.cordova.inappbrowser': '0.6.0'
@@ -28,11 +28,11 @@ Package.onUse(function(api) {
     'social-share-vars.js',
     'social-share-svg.js',
     'social-share.js',
-    'React-LmSocialShare.jsx'
+    // 'React-LmSocialShare.jsx'
   ], 'client');
 
   api.export('lmSocialShare');
-  api.export('LmSocialShare', 'client');
+  // api.export('LmSocialShare', 'client');
 });
 
 Package.onTest(function(api) {
