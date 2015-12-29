@@ -1,3 +1,53 @@
+/**
+To display vertically under each other, instead of side by side:
+*/
+/*
+.lm-social-share-cont {
+  display: block;
+}
+.lm-social-share-cont .lm-social-share-btn {
+  display: block;
+  width: 100%;
+}
+*/
+
+.lm-social-share-cont {
+  /* Necessary to avoid spaces between the divs..
+  http://stackoverflow.com/questions/19038799/why-is-there-an-unexplainable-gap-between-these-inline-block-div-elements
+  */
+  display: flex;
+}
 .lm-social-share-btn {
   cursor: pointer;
+
+  display: inline-block;
+  text-align: center;
+}
+.lm-social-share-btn-icon {
+  width: 45px;
+  height: 45px;
+  margin-left: auto;
+  margin-right: auto;
+  fill: white;
+}
+.lm-social-share-btn.lm-social-share-email {
+  background-color: #444;
+}
+.lm-social-share-btn.lm-social-share-facebook {
+  background-color: #3b5998;
+}
+.lm-social-share-btn.lm-social-share-facebook-message {
+  background-color: #3b5998;
+}
+.lm-social-share-btn.lm-social-share-gmail {
+  background-color: #dd4b39;
+}
+.lm-social-share-btn.lm-social-share-linked-in {
+  background-color: #007bb5;
+}
+.lm-social-share-btn.lm-social-share-pinterest {
+  background-color: #cb2027;
+}
+.lm-social-share-btn.lm-social-share-twitter {
+  background-color: #00acee;
 }

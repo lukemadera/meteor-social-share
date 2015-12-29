@@ -1,11 +1,35 @@
 <template name="lmSocialShare">
-  {{#if opts.facebook}}
-  <div id='{{eles.ids.facebook}}' class='lm-social-share-btn lm-social-share-facebook'>Facebook</div>
-  {{/if}}
-  {{#if opts.twitter}}
-  <div id='{{eles.ids.twitter}}' class='lm-social-share-btn lm-social-share-twitter'>Twitter</div>
-  {{/if}}
-  {{#if opts.pinterest}}
-  <div id='{{eles.ids.pinterest}}' class='lm-social-share-btn lm-social-share-pinterest'>Pinterest</div>
-  {{/if}}
+
+  <div class='lm-social-share-cont'>
+
+    {{#if opts.facebookMessage}}
+      <div id='{{eles.facebookMessage.id}}' class='lm-social-share-btn lm-social-share-facebook-message'>{{{ eles.facebookMessage.buttonHtml }}}</div>
+    {{/if}}
+
+    {{#if opts.gmail}}
+      <div id='{{eles.gmail.id}}' class='lm-social-share-btn lm-social-share-gmail'>{{{ eles.gmail.buttonHtml }}}</div>
+    {{/if}}
+
+    {{#if opts.email}}
+      <div id='{{eles.email.id}}' class='lm-social-share-btn lm-social-share-email'>{{{ eles.email.buttonHtml }}}</div>
+    {{/if}}
+
+    {{#if opts.linkedIn}}
+      <div id='{{eles.linkedIn.id}}' class='lm-social-share-btn lm-social-share-linked-in'>{{{ eles.linkedIn.buttonHtml }}}</div>
+    {{/if}}
+
+    {{#if opts.pinterest}}
+      <div id='{{eles.pinterest.id}}' class='lm-social-share-btn lm-social-share-pinterest'>{{{ eles.pinterest.buttonHtml }}}</div>
+    {{/if}}
+
+    {{#if opts.twitter}}
+      <div id='{{eles.twitter.id}}' class='lm-social-share-btn lm-social-share-twitter'>{{{ eles.twitter.buttonHtml }}}</div>
+    {{/if}}
+
+    {{#if opts.facebook}}
+      <div id='{{eles.facebook.id}}' class='lm-social-share-btn lm-social-share-facebook'>{{{ eles.facebook.buttonHtml }}}</div>
+    {{/if}}
+
+  </div>
+
 </template>

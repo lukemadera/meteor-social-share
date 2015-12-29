@@ -41,6 +41,9 @@ if(Meteor.isClient) {
         pinterest: false,
         shareData: {
           url: 'http://google.com'
+        },
+        buttonHtml: {
+          twitter: 'Twitter'
         }
       };
       return opts;
@@ -66,4 +69,3 @@ if(Meteor.isClient) {
   
 
 ```
-Then style as needed with the `lm-social-share-btn` and `lm-social-share-facebook`, `lm-social-share-twitter`, `lm-social-share-pinterest` classes.

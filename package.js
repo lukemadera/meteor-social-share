@@ -1,6 +1,6 @@
 Package.describe({
   name: 'lukemadera:social-share',
-  version: '1.0.1-rc',
+  version: '1.1.0',
   // Brief, one-line summary of the package.
   summary: 'Cross platform (inc. Cordova) social sharing for facebook, twitter, pinterest',
   // URL to the Git repository containing the source code for this package.
@@ -25,6 +25,8 @@ Package.onUse(function(api) {
   api.addFiles([
     'social-share.html',
     'social-share.css',
+    'social-share-vars.js',
+    'social-share-svg.js',
     'social-share.js',
     'React-LmSocialShare.jsx'
   ], 'client');
