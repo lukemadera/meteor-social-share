@@ -31,7 +31,10 @@ To display vertically under each other, instead of side by side:
   fill: white;
 }
 .lm-social-share-btn.lm-social-share-email {
-  background-color: #444;
+  background-color: #333;
+}
+.lm-social-share-btn.lm-social-share-sms {
+  background-color: #666;
 }
 .lm-social-share-btn.lm-social-share-facebook {
   background-color: #3b5998;
@@ -40,6 +43,9 @@ To display vertically under each other, instead of side by side:
   background-color: #3b5998;
 }
 .lm-social-share-btn.lm-social-share-gmail {
+  background-color: #dd4b39;
+}
+.lm-social-share-btn.lm-social-share-google-plus {
   background-color: #dd4b39;
 }
 .lm-social-share-btn.lm-social-share-linked-in {

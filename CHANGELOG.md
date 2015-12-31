@@ -1,12 +1,18 @@
-# 1.1.3-1
+# 1.2.0
 
-# Bug Fixes
+## Features
+
+- add `sms` and `googlePlus` type
+- test and handle issues on platforms (web, Android web, Android Cordova, iOS web, iOS Cordova)
+  - facebook iOS Cordova freezes so disabled.
+  - sms & email iOS Cordova direct links bug so used window popup.
+  - facebookMessage not supported on mobile so disabled.
+  - gmail does not work well on mobile so use email instead.
+- update README for meta tags example and Cordova access rules.
+
+## Bug Fixes
 
 - Get Cordova app links working.
-
-
-# 1.1.2
-[ no substantive changes ]
 
 
 # 1.1.1 (2015-12-29)

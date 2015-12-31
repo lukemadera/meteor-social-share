@@ -52,3 +52,19 @@ if(Meteor.isClient) {
 
 Then create your meta tags as needed. An example Iron.router meta tag script is in `router-social.js`.
 You can test your meta tags with the Chrome Inspector by spoofing the User Agent to `Facebot` or `Twitterbot`.
+
+For Cordova, add access rules to allow the links:
+
+```js
+// Social sharing
+App.accessRule('*://*.facebook.com/*');
+App.accessRule('*://*.fbcdn.net/*');
+App.accessRule('*://*.gmail.com/*');
+App.accessRule('*://*.google.com/*');
+App.accessRule('*://*.linkedin.com/*');
+App.accessRule('*://*.pinterest.com/*');
+App.accessRule('*://*.twitter.com/*');
+
+App.accessRule('mailto:*');
+App.accessRule('sms:*');
+```

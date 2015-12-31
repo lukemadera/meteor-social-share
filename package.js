@@ -1,6 +1,6 @@
 Package.describe({
   name: 'lukemadera:social-share',
-  version: '1.1.3',
+  version: '1.2.0',
   // Brief, one-line summary of the package.
   summary: 'Cross platform (inc. Cordova) social sharing for facebook, twitter, pinterest',
   // URL to the Git repository containing the source code for this package.

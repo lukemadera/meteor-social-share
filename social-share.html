@@ -2,36 +2,44 @@
 
   <div class='lm-social-share-cont'>
 
-    {{#if opts.facebookMessage}}
-      <a id='{{eles.facebookMessage.id}}' class='lm-social-share-btn lm-social-share-facebook-message'>{{{ eles.facebookMessage.buttonHtml }}}</a>
+    {{#if data.active.sms}}
+      <a id='{{data.eles.sms.id}}' class='lm-social-share-btn lm-social-share-sms'>{{{ data.eles.sms.buttonHtml }}}</a>
     {{/if}}
 
-    {{#if opts.gmail}}
-      <a id='{{eles.gmail.id}}' class='lm-social-share-btn lm-social-share-gmail'>{{{ eles.gmail.buttonHtml }}}</a>
+    {{#if data.active.facebookMessage}}
+      <a id='{{data.eles.facebookMessage.id}}' class='lm-social-share-btn lm-social-share-facebook-message'>{{{ data.eles.facebookMessage.buttonHtml }}}</a>
     {{/if}}
 
-    {{#if opts.email}}
-      <a id='{{eles.email.id}}' class='lm-social-share-btn lm-social-share-email'>{{{ eles.email.buttonHtml }}}</a>
+    {{#if data.active.gmail}}
+      <a id='{{data.eles.gmail.id}}' class='lm-social-share-btn lm-social-share-gmail'>{{{ data.eles.gmail.buttonHtml }}}</a>
     {{/if}}
 
-    {{#if opts.linkedIn}}
-      <a id='{{eles.linkedIn.id}}' class='lm-social-share-btn lm-social-share-linked-in'>{{{ eles.linkedIn.buttonHtml }}}</a>
+    {{#if data.active.email}}
+      <a id='{{data.eles.email.id}}' class='lm-social-share-btn lm-social-share-email'>{{{ data.eles.email.buttonHtml }}}</a>
     {{/if}}
 
-    {{#if opts.pinterest}}
-      <a id='{{eles.pinterest.id}}' class='lm-social-share-btn lm-social-share-pinterest'>{{{ eles.pinterest.buttonHtml }}}</a>
+    {{#if data.active.googlePlus}}
+      <a id='{{data.eles.googlePlus.id}}' class='lm-social-share-btn lm-social-share-google-plus'>{{{ data.eles.googlePlus.buttonHtml }}}</a>
     {{/if}}
 
-    {{#if opts.twitter}}
-      <a id='{{eles.twitter.id}}' class='lm-social-share-btn lm-social-share-twitter'>{{{ eles.twitter.buttonHtml }}}</a>
+    {{#if data.active.linkedIn}}
+      <a id='{{data.eles.linkedIn.id}}' class='lm-social-share-btn lm-social-share-linked-in'>{{{ data.eles.linkedIn.buttonHtml }}}</a>
     {{/if}}
 
-    {{#if opts.facebook}}
-      <a id='{{eles.facebook.id}}' class='lm-social-share-btn lm-social-share-facebook'>{{{ eles.facebook.buttonHtml }}}</a>
+    {{#if data.active.pinterest}}
+      <a id='{{data.eles.pinterest.id}}' class='lm-social-share-btn lm-social-share-pinterest'>{{{ data.eles.pinterest.buttonHtml }}}</a>
     {{/if}}
 
-    {{#if opts.url}}
-      <div id='{{eles.url.id}}' class='lm-social-share-btn lm-social-share-url'>{{{ eles.url.buttonHtml }}}</div>
+    {{#if data.active.twitter}}
+      <a id='{{data.eles.twitter.id}}' class='lm-social-share-btn lm-social-share-twitter'>{{{ data.eles.twitter.buttonHtml }}}</a>
+    {{/if}}
+
+    {{#if data.active.facebook}}
+      <a id='{{data.eles.facebook.id}}' class='lm-social-share-btn lm-social-share-facebook'>{{{ data.eles.facebook.buttonHtml }}}</a>
+    {{/if}}
+
+    {{#if data.active.url}}
+      <div id='{{data.eles.url.id}}' class='lm-social-share-btn lm-social-share-url'>{{{ data.eles.url.buttonHtml }}}</div>
     {{/if}}
 
   </div>
