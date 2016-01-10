@@ -73,7 +73,7 @@ lmSocialShare.add =function(btnId, type, shareData, params) {
       lmSocialShare.formLink(type, shareData, function(err, result) {
         if(result.link) {
           document.getElementById(btnId).href =result.link;
-          document.getElementById(btnId).target ='_blank';
+          document.getElementById(btnId).target =result.target;
         }
         else {
           console.error('lm-social-share no link');
@@ -114,65 +114,67 @@ lmSocialSharePrivate.getPlatform =function() {
 };
 
 lmSocialShare.formLink =function(type, shareData, callback) {
-  var link = null;
-  var platform;
+  var ret ={
+    link: null,
+    target: '_blank'
+  }
+  var platform =lmSocialSharePrivate.getPlatform();
   var body = shareData.body ? ( shareData.body + "\n\n" + shareData.url)
    : shareData.url;
   if( type === 'email' ) {
-    link ='mailto:?subject='+encodeURIComponent(shareData.subject) +
+    ret.link ='mailto:?subject='+encodeURIComponent(shareData.subject) +
      '&body='+encodeURIComponent(body);
-    return callback(null, { link: link });
+    return callback(null, ret);
   }
   else if( type === 'sms' ) {
-    platform =lmSocialSharePrivate.getPlatform();
     // ios does not allow pre-populating body.
     // http://stackoverflow.com/questions/16165393/ios-sms-scheme-in-html-hyperlink-with-body
-    link = ( platform.ios ) ? 'sms:' : ( 'sms:?body=' + encodeURIComponent(body) );
-    return callback(null, { link: link });
+    ret.link = ( platform.ios ) ? 'sms:' : ( 'sms:?body=' + encodeURIComponent(body) );
+    return callback(null, ret);
   }
   else if( type === 'gmail' ) {
-    link ='https://mail.google.com/mail/u/0/?view=cm&fs=1&su=' +
+    ret.link ='https://mail.google.com/mail/u/0/?view=cm&fs=1&su=' +
      encodeURIComponent(shareData.subject) + '&body=' +
      encodeURIComponent(body);
-    return callback(null, { link: link });
+    return callback(null, ret);
   }
   else if( type === 'googlePlus' ) {
-    link ='https://plus.google.com/share?url=' +
+    ret.link ='https://plus.google.com/share?url=' +
      encodeURIComponent(shareData.url);
-    return callback(null, { link: link });
+    return callback(null, ret);
   }
   else if( type === 'facebook' ) {
-    link ='https://www.facebook.com/sharer/sharer.php?u=' +
+    ret.link ='https://www.facebook.com/sharer/sharer.php?u=' +
      encodeURIComponent(shareData.url);
-    return callback(null, { link: link });
+    return callback(null, ret);
   }
   else if( type === 'facebookMessage' ) {
-    link ='https://www.facebook.com/dialog/send?link=' +
+    ret.link ='https://www.facebook.com/dialog/send?link=' +
      encodeURIComponent(shareData.url) + '&app_id=' + shareData.facebookAppId +
      '&redirect_uri=' + encodeURIComponent(shareData.redirectUrl)
      + '&display=popup';
-    return callback(null, { link: link });
+    return callback(null, ret);
   }
   else if( type === 'linkedIn' ) {
-    link ='https://www.linkedin.com/shareArticle?mini=true&url=' +
+    ret.link ='https://www.linkedin.com/shareArticle?mini=true&url=' +
      encodeURIComponent(shareData.url) + '&title=' +
      encodeURIComponent(shareData.subject) + '&summary=' +
      encodeURIComponent(body);
-    return callback(null, { link: link });
+    return callback(null, ret);
   }
   else if( type === 'pinterest' ) {
-    link ='http://pinterest.com/pin/create/button/?url=' +
+    ret.link ='http://pinterest.com/pin/create/button/?url=' +
      encodeURIComponent(shareData.url) + '&media=' +
      encodeURIComponent(shareData.image) + '&description=' +
      encodeURIComponent(shareData.description);
-    return callback(null, { link: link });
+    return callback(null, ret);
   }
   else if( type === 'twitter' ) {
-    link ='https://twitter.com/share?url=' + encodeURIComponent(shareData.url);
+    ret.link ='https://twitter.com/share?url=' + encodeURIComponent(shareData.url);
     if(shareData.defaultShareText !==undefined) {
-      link +='&text='+encodeURIComponent(shareData.defaultShareText);
+      ret.link +='&text='+encodeURIComponent(shareData.defaultShareText);
     }
-    return callback(null, { link: link });
+    return callback(null, ret);
   }
   callback(null, null);
 };
