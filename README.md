@@ -65,6 +65,6 @@ App.accessRule('*://*.linkedin.com/*');
 App.accessRule('*://*.pinterest.com/*');
 App.accessRule('*://*.twitter.com/*');
 
-App.accessRule('mailto:*');
-App.accessRule('sms:*');
+//App.accessRule('mailto:*', true);
+//App.accessRule('sms:*', true);
 ```
